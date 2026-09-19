@@ -1,0 +1,23 @@
+{
+  "example": "Text Normalizer: draft to recorded execution",
+  "input": {
+    "value": "  hello   world  "
+  },
+  "unpublished_request": {
+    "http_status": 403,
+    "status": "denied",
+    "reasons": [
+      "Package has no published release.",
+      "Published release record is missing.",
+      "Published release validation is not passing."
+    ]
+  },
+  "validation": true,
+  "published_version": 1,
+  "execution": {
+    "status": "complete",
+    "output": "hello world"
+  },
+  "external_model_calls": 0,
+  "scope": "Actual local runtime and Python execution with synthetic text. This is not a security sandbox."
+}

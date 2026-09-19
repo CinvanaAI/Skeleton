@@ -1,0 +1,46 @@
+{
+  "name": "skeleton-ownership-host",
+  "version": "0.1.0",
+  "description": "An ownership-governed local composition host for capability packages, agents, integrations, environments, coordination, and durable custody.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:runtime": "tsx apps/runtime/src/server.ts",
+    "dev:shell": "node ./apps/shell/build.mjs",
+    "build:node": "tsc -p tsconfig.json",
+    "build:shell": "node ./apps/shell/build.mjs",
+    "build": "npm run build:node && npm run build:shell",
+    "check": "tsc -p tsconfig.json --noEmit && tsc -p apps/shell/tsconfig.json --noEmit",
+    "test": "npm run build && node scripts/smoke.mjs && node scripts/storage-atomicity.mjs",
+    "demo": "node scripts/example.mjs",
+    "start:runtime": "node dist/apps/runtime/src/server.js",
+    "start:desktop": "npm run build && electron dist/apps/desktop/src/main.js"
+  },
+  "dependencies": {
+    "cors": "2.8.6",
+    "express": "4.22.2",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "29.0.2",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.6",
+    "@types/node": "22.19.15",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "4.7.0",
+    "electron": "44.0.0",
+    "rollup": "4.59.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vite": "6.4.3"
+  },
+  "overrides": {
+    "esbuild": "0.28.1"
+  }
+}

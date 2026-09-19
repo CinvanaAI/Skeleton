@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client", "node"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../../owners/framework/src/**/*.ts",
+    "../../owners/agents/src/**/*.ts",
+    "../../owners/capability-platform/src/**/*.ts",
+    "../../owners/integration/src/**/*.ts",
+    "../../owners/execution-environment/src/**/*.ts",
+    "../../owners/coordination/src/**/*.ts",
+    "../../owners/storage/src/**/*.ts"
+  ]
+}

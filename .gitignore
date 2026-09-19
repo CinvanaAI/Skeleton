@@ -1,0 +1,13 @@
+node_modules/
+dist/
+apps/shell/dist/
+.skeleton-data/
+.rebuild-data/
+.env
+.env.*
+!.env.example
+*.log
+coverage/
+.DS_Store
+Thumbs.db
+.demo-runs/
