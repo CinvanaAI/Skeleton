@@ -18,6 +18,29 @@
     "status": "complete",
     "output": "hello world"
   },
+  "version_flow": [
+    {
+      "step": "published v1",
+      "release_version": 1,
+      "output": "hello world"
+    },
+    {
+      "step": "draft edited; v1 still selected",
+      "release_version": 1,
+      "output": "hello world"
+    },
+    {
+      "step": "published v2",
+      "release_version": 2,
+      "output": "HELLO WORLD"
+    },
+    {
+      "step": "rollback republishes v1 source as v3",
+      "release_version": 3,
+      "output": "hello world"
+    }
+  ],
+  "original_release_record_unchanged": true,
   "external_model_calls": 0,
   "scope": "Actual local runtime and Python execution with synthetic text. This is not a security sandbox."
 }

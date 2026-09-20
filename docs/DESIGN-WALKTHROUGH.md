@@ -32,3 +32,7 @@ Concurrent read/write testing exposed a storage defect: readers could see a part
 ## Build on the interesting seam
 
 Change the Text Normalizer draft, save it, validate it, and publish a second local version. The earlier release remains inspectable. Compare the source form, returned output, and execution identities across versions. For agent-driven execution, inspect the separate [agent permissions and workflow implementation](../owners/agents/src/service.ts); the direct package example does not demonstrate autonomous planning.
+
+The scripted demo now performs this comparison and a rollback through the actual HTTP API. [Its captured trace](../examples/trace.json) keeps input fixed, includes source for all three releases, and verifies request/release/executor association. The old release record is compared in full after the new publications. This is evidence for the demonstrated local lifecycle, not a crash-recovery guarantee.
+
+A useful next extension is recovery across a publication's multiple records: define what startup should do if source artifacts, release history and the current-release pointer disagree after interruption. Another is an enforced process sandbox before accepting untrusted Python. Neither requires inventing an autonomous planner to make the current package lifecycle useful.

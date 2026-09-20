@@ -10,8 +10,15 @@ Install and build using the repository README, then run `npm run demo`. The scri
 | Validate | Structural validation passes | This is a package-contract check, not proof that arbitrary Python is safe. |
 | Publish | Local version 1 is created | Source and generated forms are attached to the version. |
 | Run | Python returns `hello world` | The executor records the authorized request and its result. |
+| Save an uppercase draft, then run | Version 1 still returns `hello world` | Editing source does not silently replace the published execution target. |
+| Validate and publish again | Version 2 returns `HELLO WORLD` | The same input now runs the newly published source. |
+| Roll back to version 1 | New version 3 returns `hello world` | Rollback is another publication; it does not erase versions 1 or 2. |
 
 The [captured JSON](../examples/result.json) is a public projection of that run. Full local records include execution identities, events, source artifacts, and machine paths; the demo retains them locally for inspection. Repeating the demo creates a new directory. For a chosen destination, use `node scripts/example.mjs --out NEW_DIRECTORY`; an existing destination is refused.
+
+Open [trace.json](../examples/trace.json) to compare each release's exact source and SHA-256 beside the four executed calls. The input stays fixed. Each call checks that its authorization, action-evidence record and executor result refer to the same selected release/run. The final assertion compares the complete retained version 1 record against its original.
+
+Those hashes identify source bytes; they do not establish safety. The trace deliberately omits generated IDs and machine paths. The complete local records retain them so an operator can follow an individual invocation.
 
 ## Through the interface
 
@@ -22,6 +29,8 @@ The result should contain `"output": "sample text"`, executor status `complete`,
 ![Actual workbench after the synthetic text-normalization action.](assets/recorded-result.png)
 
 Use **Lifecycle Ledger** to inspect versions and **Execution Environment** to examine run records. Publishing here is entirely local. The runtime stops when you stop its terminal; saved records remain in `.skeleton-data/`.
+
+To repeat the version comparison through the interface, save a changed draft before validating/publishing it. Run the published action between saving and publishing: it should still use the previous release. The automated demo exercises that same runtime API and leaves all versions for inspection. The screenshots show the original single-version browser walkthrough; this edition did not change the interface layout.
 
 ## If the example cannot complete
 

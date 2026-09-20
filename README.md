@@ -10,7 +10,7 @@ This repository contains the later **TypeScript rebuild**. It carries forward id
 
 **Status: runnable architectural prototype.** It is useful for exploring package lifecycles, workflow permissions, and recorded execution. It is not a hardened sandbox or a production multi-user service.
 
-**[Follow a complete run](docs/FIRST-RUN.md)** · **[Inspect its result](examples/result.json)** · **[Trace the mechanism](docs/DESIGN-WALKTHROUGH.md)**
+**[Follow a complete run](docs/FIRST-RUN.md)** · **[Inspect its result](examples/result.json)** · **[Compare releases and source](examples/trace.json)** · **[Trace the mechanism](docs/DESIGN-WALKTHROUGH.md)**
 
 ![The local workbench with a selected Python text-normalizer package.](docs/assets/package-workbench.png)
 
@@ -28,7 +28,9 @@ npm run build
 npm run demo
 ```
 
-The demo starts an isolated local runtime, confirms that an unpublished action is denied, validates and publishes Text Normalizer, and runs its Python function. It returns `hello world` from `"  hello   world  "`, saves `result.json` and complete runtime records under a new `.demo-runs/` directory, then stops the runtime. It makes no model calls and preserves each run. Compare the [captured result](examples/result.json).
+The demo starts an isolated local runtime, confirms that an unpublished action is denied, validates and publishes Text Normalizer, and runs its Python function. It returns `hello world` from `"  hello   world  "`. It then edits the draft to uppercase the result: version 1 keeps returning `hello world`, version 2 returns `HELLO WORLD`, and rolling back makes a new version 3 that returns `hello world` again. The original version 1 record remains unchanged.
+
+Each run retains `result.json`, `trace.json` and complete runtime records under a new `.demo-runs/` directory, then stops the runtime. The trace includes exact synthetic source forms, their hashes, request inputs and actual outputs, with assertions that authorization and execution evidence identify the selected release. It makes no model calls and preserves each run. Compare the [captured trace](examples/trace.json).
 
 To explore through the browser:
 

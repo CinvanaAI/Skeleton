@@ -1,0 +1,78 @@
+{
+  "example": "One input across draft edits, releases and rollback",
+  "package_id": "cap.text.normalizer",
+  "changed_draft_source": "def normalize_text(value):\n    return ' '.join(str(value).split()).upper()\n",
+  "steps": [
+    {
+      "step": "published v1",
+      "operation": "POST /capability-platform/packages/cap.text.normalizer/actions/run",
+      "http_status": 200,
+      "release_version": 1,
+      "input": {
+        "value": "  hello   world  "
+      },
+      "output": "hello world",
+      "authorization_matches_release": true,
+      "action_record_matches_executor": true
+    },
+    {
+      "step": "draft edited; v1 still selected",
+      "operation": "POST /capability-platform/packages/cap.text.normalizer/actions/run",
+      "http_status": 200,
+      "release_version": 1,
+      "input": {
+        "value": "  hello   world  "
+      },
+      "output": "hello world",
+      "authorization_matches_release": true,
+      "action_record_matches_executor": true
+    },
+    {
+      "step": "published v2",
+      "operation": "POST /capability-platform/packages/cap.text.normalizer/actions/run",
+      "http_status": 200,
+      "release_version": 2,
+      "input": {
+        "value": "  hello   world  "
+      },
+      "output": "HELLO WORLD",
+      "authorization_matches_release": true,
+      "action_record_matches_executor": true
+    },
+    {
+      "step": "rollback republishes v1 source as v3",
+      "operation": "POST /capability-platform/packages/cap.text.normalizer/actions/run",
+      "http_status": 200,
+      "release_version": 3,
+      "input": {
+        "value": "  hello   world  "
+      },
+      "output": "hello world",
+      "authorization_matches_release": true,
+      "action_record_matches_executor": true
+    }
+  ],
+  "retained_releases": [
+    {
+      "version": 3,
+      "entrypoint": "normalize_text",
+      "source": "def normalize_text(value: str) -> str:\n    return \" \".join(value.strip().split())",
+      "source_sha256": "6e950108fbc5bd444b4266e088ea73540850953393424299ce3cc43dd9e9ee11"
+    },
+    {
+      "version": 2,
+      "entrypoint": "normalize_text",
+      "source": "def normalize_text(value):\n    return ' '.join(str(value).split()).upper()\n",
+      "source_sha256": "f324313d7c4a31e5f53a26888d00cf48a79c4223f204dc2b070dbd672385b508"
+    },
+    {
+      "version": 1,
+      "entrypoint": "normalize_text",
+      "source": "def normalize_text(value: str) -> str:\n    return \" \".join(value.strip().split())",
+      "source_sha256": "6e950108fbc5bd444b4266e088ea73540850953393424299ce3cc43dd9e9ee11"
+    }
+  ],
+  "original_release_record_unchanged": true,
+  "external_model_calls": 0,
+  "evidence_note": "Public projection of actual local HTTP/Python results. Full identifiers and records remain in the local runtime directory."
+}
